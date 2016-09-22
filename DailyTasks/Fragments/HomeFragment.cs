@@ -39,21 +39,6 @@ namespace DailyTasks
 		{
 			base.OnActivityCreated(savedInstanceState);
 
-			tasks = TaskManager.GetTasks();
-
-			// create our adapter
-
-			try
-			{
-				taskList = new Adapters.TaskListAdapter(this.Activity, tasks);
-				//Hook up our adapter to our ListView
-				listView.Adapter = taskList;
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message + "Error: " + ex.InnerException);
-			}
-
 			if (listView != null)
 			{
 				listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
@@ -69,11 +54,24 @@ namespace DailyTasks
 			};
 		}
 
-		//public override void OnResume()
-		//{
-		//	base.OnResume();	
+		public override void OnResume()
+		{
+			base.OnResume();	
 
+			tasks = TaskManager.GetTasks();
 
-		//}
+			// create our adapter
+
+			try
+			{
+				taskList = new Adapters.TaskListAdapter(this.Activity, tasks);
+				//Hook up our adapter to our ListView
+				listView.Adapter = taskList;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message + "Error: " + ex.InnerException);
+			}
+		}
 	}
 }
