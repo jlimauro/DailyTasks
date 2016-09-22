@@ -11,6 +11,9 @@
 		<item 
 			android:id="@+id/tasks"
 			android:title="Tasks" />
+		<item 
+			android:id="@+id/addNewTask"
+			android:title="Add Task" 
+			/>
     </group>
-
 </menu>

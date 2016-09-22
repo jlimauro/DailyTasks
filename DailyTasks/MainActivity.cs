@@ -14,6 +14,8 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 using FloatingActionButton = Clans.Fab.FloatingActionButton;
 using Fragment = Android.Support.V4.App.Fragment;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
+using System.Collections.Generic;
+using DailyTasks.Core;
 
 namespace DailyTasks
 {
@@ -23,6 +25,9 @@ namespace DailyTasks
 		private DrawerLayout drawerLayout;
 		private ActionBarDrawerToggle toggle;
 		private NavigationView navigationView;
+
+		Adapters.TaskListAdapter taskList;
+		IList<Task> tasks;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -88,6 +93,10 @@ namespace DailyTasks
 			{
 				case Resource.Id.tasks:
 					fragment = new HomeFragment();
+					break;
+				case Resource.Id.addTask:
+				case Resource.Id.addNewTask:
+					fragment = new TaskDetailFragment();
 					break;
 			}
 

@@ -2086,6 +2086,27 @@ namespace DailyTasks
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f0a008e
+			public const int CancelDeleteButton = 2131361934;
+			
+			// aapt resource value: 0x7f0a0088
+			public const int NameLabel = 2131361928;
+			
+			// aapt resource value: 0x7f0a0089
+			public const int NameText = 2131361929;
+			
+			// aapt resource value: 0x7f0a008a
+			public const int NotesLabel = 2131361930;
+			
+			// aapt resource value: 0x7f0a008b
+			public const int NotesText = 2131361931;
+			
+			// aapt resource value: 0x7f0a008d
+			public const int SaveButton = 2131361933;
+			
+			// aapt resource value: 0x7f0a0087
+			public const int TaskDetailsHeader = 2131361927;
+			
 			// aapt resource value: 0x7f0a007a
 			public const int action0 = 2131361914;
 			
@@ -2134,6 +2155,9 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a0040
 			public const int activity_chooser_view_content = 2131361856;
 			
+			// aapt resource value: 0x7f0a0092
+			public const int addNewTask = 2131361938;
+			
 			// aapt resource value: 0x7f0a0076
 			public const int addTask = 2131361910;
 			
@@ -2166,6 +2190,9 @@ namespace DailyTasks
 			
 			// aapt resource value: 0x7f0a0055
 			public const int checkbox = 2131361877;
+			
+			// aapt resource value: 0x7f0a008c
+			public const int chkDone = 2131361932;
 			
 			// aapt resource value: 0x7f0a0081
 			public const int chronometer = 2131361921;
@@ -2260,8 +2287,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a0078
 			public const int fragment = 2131361912;
 			
-			// aapt resource value: 0x7f0a0088
-			public const int group1 = 2131361928;
+			// aapt resource value: 0x7f0a0090
+			public const int group1 = 2131361936;
 			
 			// aapt resource value: 0x7f0a0006
 			public const int home = 2131361798;
@@ -2452,8 +2479,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a0075
 			public const int taskList = 2131361909;
 			
-			// aapt resource value: 0x7f0a0089
-			public const int tasks = 2131361929;
+			// aapt resource value: 0x7f0a0091
+			public const int tasks = 2131361937;
 			
 			// aapt resource value: 0x7f0a0084
 			public const int text = 2131361924;
@@ -2473,8 +2500,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a004b
 			public const int title_template = 2131361867;
 			
-			// aapt resource value: 0x7f0a0087
-			public const int toolbar = 2131361927;
+			// aapt resource value: 0x7f0a008f
+			public const int toolbar = 2131361935;
 			
 			// aapt resource value: 0x7f0a001d
 			public const int top = 2131361821;
@@ -2704,7 +2731,10 @@ namespace DailyTasks
 			public const int support_simple_spinner_dropdown_item = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int toolbar = 2130968628;
+			public const int TaskDetails = 2130968628;
+			
+			// aapt resource value: 0x7f040035
+			public const int toolbar = 2130968629;
 			
 			static Layout()
 			{

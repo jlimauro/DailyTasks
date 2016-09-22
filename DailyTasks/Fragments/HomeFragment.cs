@@ -10,22 +10,24 @@ using Fragment = Android.Support.V4.App.Fragment;
 using FloatingActionButton = Clans.Fab.FloatingActionButton;
 using System.Collections.Generic;
 using Clans.Fab;
+using DailyTasks.Core;
 
 namespace DailyTasks
 {
 	public class HomeFragment : Fragment
 	{
 		private FloatingActionButton fab;
-		private FloatingActionMenu menuRed; 
-		private int previousVisibleItem;
 		private ListView listView;
-		private readonly bool hideFab;
+		Adapters.TaskListAdapter taskList;
+		IList<Task> tasks;
 
 		public override void OnViewCreated(View view, Bundle savedInstanceState)
 		{
 			base.OnViewCreated(view, savedInstanceState);
 			this.listView = view.FindViewById<ListView>(Resource.Id.taskList);
 			this.fab = view.FindViewById<FloatingActionButton>(Resource.Id.addTask);
+
+			TaskManager.CreateDatabase();
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -37,11 +39,41 @@ namespace DailyTasks
 		{
 			base.OnActivityCreated(savedInstanceState);
 
-			var tasks = new List<string>() { "Take Medicine", "Go to work", "Call Boyfriend" };
+			tasks = TaskManager.GetTasks();
 
-			// Here you would edit adaptor to add button and events.
-			this.listView.Adapter = new ArrayAdapter(this.Activity, Android.Resource.Layout.SimpleListItem1,
-				Android.Resource.Id.Text1, tasks);
+			// create our adapter
+
+			try
+			{
+				taskList = new Adapters.TaskListAdapter(this.Activity, tasks);
+				//Hook up our adapter to our ListView
+				listView.Adapter = taskList;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message + "Error: " + ex.InnerException);
+			}
+
+			if (listView != null)
+			{
+				listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+				{
+					var taskDetails = new TaskDetailFragment();
+					taskDetails.TaskId = tasks[e.Position].ID;
+				};
+			}
+
+			fab.Click += (sender, e) => { 
+			
+				var taskDetails = new TaskDetailFragment();			
+			};
 		}
+
+		//public override void OnResume()
+		//{
+		//	base.OnResume();	
+
+
+		//}
 	}
 }
