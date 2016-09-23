@@ -29,9 +29,6 @@ namespace DailyTasks
 		private FragmentTransaction ft;
 		public InputMethodManager imm;
 
-		Adapters.TaskListAdapter taskList;
-		IList<Task> tasks;
-
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
