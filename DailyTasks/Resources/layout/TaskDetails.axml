@@ -50,14 +50,20 @@
         <Button
             android:id="@+id/SaveButton"
             android:text="Save"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/chkDone" />
         <Button
             android:id="@+id/CancelDeleteButton"
             android:text="Cancel"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/SaveButton" />
+        <Button
+            android:id="@+id/BackButton"
+            android:text="Back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CancelDeleteButton" />
     </RelativeLayout>
 </FrameLayout>

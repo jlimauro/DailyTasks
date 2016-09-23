@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Clans.Fab;
 using DailyTasks.Core;
 using Android.Views.InputMethods;
+using Android.Support.V7.App;
 
 namespace DailyTasks
 {
@@ -22,6 +23,7 @@ namespace DailyTasks
 		EditText nameTextEdit;
 		Button saveButton;
 		CheckBox doneCheckbox;
+		Button backButton;
 		private int TaskId;
 
 		public TaskDetailFragment() { }
@@ -40,6 +42,7 @@ namespace DailyTasks
 			saveButton = view.FindViewById<Button>(Resource.Id.SaveButton);
 			doneCheckbox = view.FindViewById<CheckBox>(Resource.Id.chkDone);
 			cancelDeleteButton = view.FindViewById<Button>(Resource.Id.CancelDeleteButton);
+			backButton = view.FindViewById<Button>(Resource.Id.BackButton);
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -58,7 +61,7 @@ namespace DailyTasks
 				nameTextEdit.Text = task.Name;
 				notesTextEdit.Text = task.Notes;
 				doneCheckbox.Checked = task.Done;
-			} 
+			}
 
 			// set the cancel delete based on whether or not it's an existing task
 			cancelDeleteButton.Text = (task.ID == 0 ? "Cancel" : "Delete");
@@ -68,6 +71,14 @@ namespace DailyTasks
 				CancelDelete();
 				HideKeyboard();
 			};
+
+			backButton.Visibility = (task.ID == 0 ? ViewStates.Invisible : ViewStates.Visible);
+
+			backButton.Click += (sender, e) =>
+			{
+				ReturnHome();
+			};
+
 			saveButton.Click += (sender, e) => {
 				Save();
 				HideKeyboard();			
@@ -80,12 +91,31 @@ namespace DailyTasks
 			task.Notes = notesTextEdit.Text;
 			task.Done = doneCheckbox.Checked;
 
-			if (TaskId == 0)
-				TaskManager.SaveTask(task);
-			else
-				TaskManager.UpdateTask(task);
+			if (!string.IsNullOrEmpty(task.Name))
+			{
+				if (TaskId == 0)
+					TaskManager.SaveTask(task);
+				else
+					TaskManager.UpdateTask(task);
 
-			ReturnHome();
+				ReturnHome();
+			}
+			else
+			{
+				var main = (MainActivity)Activity;
+				AlertDialog.Builder alert = new AlertDialog.Builder(main);
+
+				alert.SetTitle("Task Name is Required!");
+
+				alert.SetPositiveButton("OK", (senderAlert, args) =>
+				{ });
+
+				//run the alert in UI thread to display in the screen
+				main.RunOnUiThread(() =>
+				{
+					alert.Show();
+				});
+			}
 		}
 
 		void CancelDelete()

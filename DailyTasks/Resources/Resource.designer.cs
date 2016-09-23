@@ -2086,6 +2086,9 @@ namespace DailyTasks
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f0a008f
+			public const int BackButton = 2131361935;
+			
 			// aapt resource value: 0x7f0a008e
 			public const int CancelDeleteButton = 2131361934;
 			
@@ -2155,8 +2158,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a0040
 			public const int activity_chooser_view_content = 2131361856;
 			
-			// aapt resource value: 0x7f0a0092
-			public const int addNewTask = 2131361938;
+			// aapt resource value: 0x7f0a0093
+			public const int addNewTask = 2131361939;
 			
 			// aapt resource value: 0x7f0a0076
 			public const int addTask = 2131361910;
@@ -2287,8 +2290,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a0078
 			public const int fragment = 2131361912;
 			
-			// aapt resource value: 0x7f0a0090
-			public const int group1 = 2131361936;
+			// aapt resource value: 0x7f0a0091
+			public const int group1 = 2131361937;
 			
 			// aapt resource value: 0x7f0a0006
 			public const int home = 2131361798;
@@ -2479,8 +2482,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a0075
 			public const int taskList = 2131361909;
 			
-			// aapt resource value: 0x7f0a0091
-			public const int tasks = 2131361937;
+			// aapt resource value: 0x7f0a0092
+			public const int tasks = 2131361938;
 			
 			// aapt resource value: 0x7f0a0084
 			public const int text = 2131361924;
@@ -2500,8 +2503,8 @@ namespace DailyTasks
 			// aapt resource value: 0x7f0a004b
 			public const int title_template = 2131361867;
 			
-			// aapt resource value: 0x7f0a008f
-			public const int toolbar = 2131361935;
+			// aapt resource value: 0x7f0a0090
+			public const int toolbar = 2131361936;
 			
 			// aapt resource value: 0x7f0a001d
 			public const int top = 2131361821;
