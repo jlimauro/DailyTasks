@@ -10,6 +10,7 @@ using FloatingActionButton = Clans.Fab.FloatingActionButton;
 using System.Collections.Generic;
 using Clans.Fab;
 using DailyTasks.Core;
+using Android.Views.InputMethods;
 
 namespace DailyTasks
 {
@@ -21,8 +22,14 @@ namespace DailyTasks
 		EditText nameTextEdit;
 		Button saveButton;
 		CheckBox doneCheckbox;
+		private int TaskId;
 
-		public int TaskId { get; set; } = 0;
+		public TaskDetailFragment() { }
+
+		public TaskDetailFragment(int taskId)
+		{
+			TaskId = taskId;
+		}
 
 		public override void OnViewCreated(View view, Bundle savedInstanceState)
 		{
@@ -57,8 +64,14 @@ namespace DailyTasks
 			cancelDeleteButton.Text = (task.ID == 0 ? "Cancel" : "Delete");
 
 			// button clicks 
-			cancelDeleteButton.Click += (sender, e) => { CancelDelete(); };
-			saveButton.Click += (sender, e) => { Save(); };
+			cancelDeleteButton.Click += (sender, e) => { 
+				CancelDelete();
+				HideKeyboard();
+			};
+			saveButton.Click += (sender, e) => {
+				Save();
+				HideKeyboard();			
+			};
 		}
 
 		void Save()
@@ -66,7 +79,13 @@ namespace DailyTasks
 			task.Name = nameTextEdit.Text;
 			task.Notes = notesTextEdit.Text;
 			task.Done = doneCheckbox.Checked;
-			TaskManager.SaveTask(task);
+
+			if (TaskId == 0)
+				TaskManager.SaveTask(task);
+			else
+				TaskManager.UpdateTask(task);
+
+			ReturnHome();
 		}
 
 		void CancelDelete()
@@ -75,6 +94,22 @@ namespace DailyTasks
 			{
 				TaskManager.DeleteTask(task.ID);
 			}
+
+			ReturnHome();
+		}
+
+		void HideKeyboard()
+		{
+			var main = (MainActivity)this.Activity;
+
+			main.imm.HideSoftInputFromWindow(nameTextEdit.WindowToken, 0);
+			main.imm.HideSoftInputFromWindow(notesTextEdit.WindowToken, 0);
+		}
+
+		void ReturnHome()
+		{
+			var myActivity = (MainActivity)this.Activity;
+			myActivity.ChangeFragment(Resource.Id.tasks);
 		}
 
 	}

@@ -43,14 +43,16 @@ namespace DailyTasks
 			{
 				listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
 				{
-					var taskDetails = new TaskDetailFragment();
-					taskDetails.TaskId = tasks[e.Position].ID;
+					var activity = (MainActivity)this.Activity;
+					activity.ChangeFragment(Resource.Id.addTask, tasks[e.Position].ID); 
 				};
+
 			}
 
 			fab.Click += (sender, e) => { 
 			
-				var taskDetails = new TaskDetailFragment();			
+				var activity = (MainActivity)this.Activity;
+				activity.ChangeFragment(Resource.Id.addNewTask);
 			};
 		}
 

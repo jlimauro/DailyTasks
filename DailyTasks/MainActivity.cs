@@ -16,6 +16,7 @@ using Fragment = Android.Support.V4.App.Fragment;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using System.Collections.Generic;
 using DailyTasks.Core;
+using Android.Views.InputMethods;
 
 namespace DailyTasks
 {
@@ -25,6 +26,8 @@ namespace DailyTasks
 		private DrawerLayout drawerLayout;
 		private ActionBarDrawerToggle toggle;
 		private NavigationView navigationView;
+		private FragmentTransaction ft;
+		public InputMethodManager imm;
 
 		Adapters.TaskListAdapter taskList;
 		IList<Task> tasks;
@@ -52,6 +55,7 @@ namespace DailyTasks
 
 			navigationView.SetCheckedItem(Resource.Id.home);
 
+			imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
 		}
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
@@ -86,10 +90,18 @@ namespace DailyTasks
 		private void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{
 			this.drawerLayout.CloseDrawer((int)GravityFlags.Start);
-			Fragment fragment = null;
-			FragmentTransaction ft = SupportFragmentManager.BeginTransaction();
+		
+			ChangeFragment(e.MenuItem.ItemId);
 
-			switch (e.MenuItem.ItemId)
+			e.Handled = true;
+		}
+
+		public void ChangeFragment(int itemId)
+		{
+			Fragment fragment = null;
+			ft = SupportFragmentManager.BeginTransaction();
+
+			switch (itemId)
 			{
 				case Resource.Id.tasks:
 					fragment = new HomeFragment();
@@ -101,7 +113,28 @@ namespace DailyTasks
 			}
 
 			ft.Replace(Resource.Id.fragment, fragment).Commit();
-			e.Handled = true;
+		}
+
+		public void ChangeFragment(int itemId, int taskId)
+		{
+			Fragment fragment = null;
+			ft = SupportFragmentManager.BeginTransaction();
+
+			switch (itemId)
+			{
+				case Resource.Id.tasks:
+					fragment = new HomeFragment();
+					break;
+				case Resource.Id.addTask:
+				case Resource.Id.addNewTask:
+					if (taskId > 0)
+						fragment = new TaskDetailFragment(taskId);
+					else
+						fragment = new TaskDetailFragment();
+					break;
+			}
+
+			ft.Replace(Resource.Id.fragment, fragment).Commit();
 		}
 	}
 }

@@ -35,5 +35,10 @@ namespace DailyTasks.Core {
 		{
 			return TaskRepository.DeleteTask(id);
 		}
+
+		public static int UpdateTask(Task item)
+		{
+			return TaskRepository.UpdateTask(item);
+		}
 	}
 }

@@ -56,6 +56,26 @@ namespace DailyTasks.Core
 			}
 		}
 
+		public static int UpdateTask(Task item)
+		{
+			int retVal = 0;
+
+			using (SQLiteConnection dbConn = new SQLiteConnection(System.IO.Path.Combine(dbPath, "TaskListData.db")))
+			{
+				try
+				{
+					retVal = dbConn.Update(item);
+					Console.WriteLine("Task Updated");
+				}
+				catch
+				{
+					Console.WriteLine("Error Updating Task");
+					return -1;
+				}
+			}
+			return retVal;
+		}
+
 		public static int SaveTask(Task item)
 		{
 			int retVal = 0;
